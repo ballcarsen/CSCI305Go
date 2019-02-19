@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 )
 
 func open(location string) []byte {
@@ -12,11 +13,20 @@ func open(location string) []byte {
 	return data
 }
 
-func parse(data []byte) {
-	fmt.Println(string(data))
-	for item := range data {
-		fmt.Println(string(item))
+func write(outLoc string, data []byte) {
+	err := ioutil.WriteFile(outLoc, data, 0644)
+	checkErr(err)
+}
+
+func parse(data []byte) []byte {
+	var output []byte
+	for i := range data {
+		chr := string(data[i])
+		if _, err := strconv.Atoi(chr); err != nil {
+			output = append(output, data[i])
+		}
 	}
+	return output
 }
 
 func checkErr(e error) {
@@ -30,5 +40,6 @@ func main() {
 	data := open(args[0])
 	outputName := args[1]
 	fmt.Println(outputName)
-	parse(data)
+	dt := parse(data)
+	write(outputName, dt)
 }
