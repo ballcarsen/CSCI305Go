@@ -9,7 +9,7 @@ import (
 func open(location string) {
 	dat, err := ioutil.ReadFile(location)
 	checkErr(err)
-	fmt.Println(dat)
+	fmt.Println(string(dat))
 }
 
 func checkErr(e error) {
