@@ -6,16 +6,16 @@ import (
 	"os"
 )
 
-func open(location string) {
+func open(location string) []byte {
 	data, err := ioutil.ReadFile(location)
 	checkErr(err)
 	return data
 }
 
-func parse(data byte[]) {
-	
+func parse(data []byte) {
+	fmt.Println(string(data))
 	for item := range data {
-		fmt.PrintLn(string(item))
+		fmt.Println(string(item))
 	}
 }
 
@@ -27,7 +27,8 @@ func checkErr(e error) {
 
 func main() {
 	args := os.Args[1:]
-	data = open(args[0])
-	outputName = args[1]
-
+	data := open(args[0])
+	outputName := args[1]
+	fmt.Println(outputName)
+	parse(data)
 }
