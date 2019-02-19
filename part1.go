@@ -7,9 +7,16 @@ import (
 )
 
 func open(location string) {
-	dat, err := ioutil.ReadFile(location)
+	data, err := ioutil.ReadFile(location)
 	checkErr(err)
-	fmt.Println(string(dat))
+	return data
+}
+
+func parse(data byte[]) {
+	
+	for item := range data {
+		fmt.PrintLn(string(item))
+	}
 }
 
 func checkErr(e error) {
@@ -20,5 +27,7 @@ func checkErr(e error) {
 
 func main() {
 	args := os.Args[1:]
-	open(args[0])
+	data = open(args[0])
+	outputName = args[1]
+
 }
