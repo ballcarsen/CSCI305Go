@@ -1,7 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
+func open(location string) {
+	dat, err := ioutil.ReadFile(location)
+	checkErr(err)
+	fmt.Println(dat)
+}
+
+func checkErr(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
 
 func main() {
-	fmt.Println("Hello")
+	args := os.Args[1:]
+	open(args[0])
 }
